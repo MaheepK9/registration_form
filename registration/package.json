@@ -1,0 +1,14 @@
+{
+  "name": "registration",
+  "version": "1.0.0",
+  "description": "This template was made by Colorlib (https://colorlib.com) Please visit our website for more awesome templates, themes and tools.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

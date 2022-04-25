@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SAE-AKGEC</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="who.png" rel="icon">
+	
+	<link rel="stylesheet" type="text/css" href="css/opensans-font.css">
+	<link rel="stylesheet" type="text/css" href="fonts/line-awesome/css/line-awesome.min.css">
+	
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="form">
+	<div class="page-content">
+		<div class="form-content">
+			<div class="form-left">
+				<img src="Group 2 (2).png" alt="form">	
+			</div>
+			
+		
+			
+			<form class="form-detail" action="/test" id="myform" method="post" >
+				<div class="form-head">
+					<h2 style="font-size: 40px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: center;color: rgb(47, 44, 44);">REGISTER HERE</h2>
+				</div>
+				<br>
+			
+				<div class="form-row">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="username" class="input-text" required />
+				</div>
+				<div class="form-row">
+					<label for="email">E-Mail</label>
+					<input type="email" name="email" id="email" class="input-text" pattern=".+@gmail\.com|.+@akgec\.ac\.in" required />
+				</div>
+				<div class="form-row">
+					<label for="branch">Branch</label>
+					<input type="text" name="branch" id="branch" class="input-text" required />
+				</div>
+				<div class="form-row">
+					<label for="branch">Section</label>
+					<input type="text" name="section" id="section"  class="input-text" required />
+				</div>
+				
+				<div class="form-row">
+					<label for="phone_no">Phone</label>
+					<input type="number" name="phone_no" id="phone_no" class="input-text"  pattern="[789][0-9]{9}" title="Please enter valid phone number" required />
+				</div>
+				<div class="form-row">
+					<label for="number">Student Number</label>
+					<input type="number" name="student_no" id="student_no" class="input-text"  min="2100000" max="2199999" title="Please enter valid student number" required />
+				</div>
+
+
+				
+				<div class="form-row-last">
+					<input type="button"  style="text-align: center;" name="register" class="register" value="Register" id="register" onclick="submit()">
+				</div>
+				
+			</form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+	
+		jQuery.validator.setDefaults({
+		  	debug: true,
+		  	success:  function(label){
+        		label.attr('id', 'valid');
+   		 	},
+		});
+		$( "#myform" ).validate({
+		  	rules: {
+			    your_email: {
+			      	required: true,
+			      	email: true
+			    },
+			    password: "required",
+		    	comfirm_password: {
+		      		equalTo: "#password"
+		    	}
+		  	},
+		  	messages: {
+		  		username: {
+		  			required: "Please enter an username"
+		  		},
+		  		your_email: {
+		  			required: "Please provide an email"
+		  		},
+		  		
+		  	}
+		});
+
+		function submit(){
+			const form = document.getElementById('myform');
+			form.submit();
+		}
+
+		 function submit(){
+		 	let http = new XMLHttpRequest();
+		 	http.open("POST", "http://localhost:3000/register", true);
+
+		 	http.setRequestHeader('Accept', 'application/json');
+		 	http.setRequestHeader('Content-Type', 'application/json');
+
+		 	http.onreadystatechange = function() {
+		 		if (http.readyState == 4 && http.status == 200){
+		 			alert(http.responseText);
+		 		}
+		 		else{
+		 			alert(http.response);
+		 		}
+		 	}
+
+		 	const data = `{
+		 		"name": "test",
+		 		"email": "test@abc.com",
+		 		"phone_no": 9123456789,
+		 		"student_no": 2113063,
+		 		"branch": "IT",
+		 		"section": "IT-2"
+		 	}`;
+
+		 	http.send(data);
+		 }
+	</script>
+	<script>
+
+		$("#register").click(function(){
+
+			var name = $("#username").val();
+			var email = $("#email").val();
+			var branch = $("#branch").val();
+			var section = $("#section").val();
+			var student_no = $("#student_no").val();
+			var phone_no = $("#phone_no").val();
+			
+			if(username == '' || email == '' || branch == '' || section == '' || student_no == '' || phone_no == ''){
+				swal("Fields empty!", "Please enter the missing fields", "warning");
+			}
+			else{
+
+				swal("Success!", "You are successfully registered!", "success");
+			}
+		})
+	</script>
+</body>
+</html>
